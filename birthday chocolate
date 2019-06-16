@@ -1,0 +1,31 @@
+#include <assert.h>
+#include <ctype.h>
+#include <limits.h>
+#include <math.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int main(){
+    int n,*s,i,j,d,l,m,temp=0,count=0;
+    scanf("%d",&n);
+    s=malloc(n * sizeof(int));
+    for(i=0;i<n;i++)
+    scanf("%d",&s[i]);
+    scanf("%d %d",&d,&m);
+    l=m;
+    for(i=0;i<n-m+1;i++){
+        j=i;temp=0;
+      while (m != 0) {
+        temp = temp+s[j];
+        j++;m--;
+      }
+      m=l;
+        if(d==temp)
+        count++;
+    }
+    printf("%d",count);
+
+}
