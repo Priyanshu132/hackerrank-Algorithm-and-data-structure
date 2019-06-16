@@ -1,0 +1,29 @@
+#include <assert.h>
+#include <limits.h>
+#include <math.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int main(){
+    int n,*score,min,max,hs=0,ls=0,i;   // hs=highest score and ls= lowest score.
+    scanf("%d",&n);
+    score=malloc(n * sizeof(int));
+    for(i=0;i<n;i++)
+    scanf("%d",&score[i]);
+    min = score[0];
+    max = score[0];
+    for(i=0;i<n-1;i++){
+        if (min > score[i + 1]) {
+          min = score[i + 1];
+          ls++;
+        }
+        if(max<score[i+1]){
+            max=score[i+1];
+            hs++;
+        }
+    }
+ printf("%d %d",hs,ls);
+}
