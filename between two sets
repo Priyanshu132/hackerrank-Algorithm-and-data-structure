@@ -1,0 +1,42 @@
+#include <assert.h>
+#include <ctype.h>
+#include <limits.h>
+#include <math.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int main(){
+    int i,j,n,m,k,h=0,l,*a,*b,count=0;;
+    scanf("%d %d",&n,&m);
+    a=malloc(n * sizeof(int));
+    b=malloc(m * sizeof(int));
+    for(i=0;i<n;i++)
+    scanf("%d",&a[i]);
+    for(i=0;i<m;i++)
+    scanf("%d",&b[i]);
+    for(i=a[n-1];i<=b[0];i++){
+        h=0;
+      for (j = 0; j < n; j++) {
+        if (i % a[j]!=0){
+            h++;
+            break;
+        }
+      }if(h>0)
+      continue;
+      for(k=0;k<m;k++){
+          l=0;
+          if (b[k] % i != 0) {
+            l++;
+            break;
+          }
+      }
+          if(l==0)
+          count++;
+      
+    }
+    printf("%d",count);
+
+}
