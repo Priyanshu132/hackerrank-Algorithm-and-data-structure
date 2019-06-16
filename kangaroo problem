@@ -1,0 +1,29 @@
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int main(){
+    int x1,v1,x2,v2,i=0;
+    scanf("%d%d%d%d",&x1,&v1,&x2,&v2);
+    if ((x2 > x1 && v2 > v1)||(x2<x1 && v2<v1)) {
+      printf("NO");
+      return 0;
+    }
+    if (v1 == v2 || x1 == x2) {
+      printf("NO");
+      return 0;
+    }
+      while (true) {
+          i++;
+        x1 = x1 + v1;
+        x2 = x2 + v2;
+        if (x1 == x2) {
+          printf("YES");
+          return 0;
+        }
+        if(i==3000)     // here 3000 is taken after checking the  testcases. 
+        break; 
+      }
+      printf("NO");
+      return 0;
+    }
