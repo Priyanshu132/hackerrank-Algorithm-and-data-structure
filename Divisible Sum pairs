@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main(){
+    int n,k,*a,i,temp,count=0;
+    scanf("%d %d",&n,&k);
+    a=malloc(n * sizeof(int));
+    for(i=0;i<n;i++)
+    scanf("%d",&a[i]);
+    for(i=0;i<n-1;i++){
+      for (int j = i+1; j < n; j++) {
+        temp = a[i] + a[j];
+        if(temp%k==0)
+         count++;
+      }
+    }
+    printf("%d",count);
+
+}
