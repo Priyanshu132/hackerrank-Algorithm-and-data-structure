@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main(){
+    int y;
+    scanf("%d",&y);
+    if(y>=1919){
+      if ((y % 4 == 0 && y % 100 != 0) || (y % 400 == 0)) {
+        printf("12.09.%d", y);
+      } else
+        printf("13.09.%d", y);
+    }
+    if (y == 1918)
+      printf("26.09.1918");
+    if (y >= 1700 && y <= 1917) {
+      if (y == 1800 || y==1900 || y==1700) {           // here the quwstion says wrong leap year 1800 is not leap year but it says yes it is leap year.
+        printf("12.09.%d",y);
+        return 0;
+      }
+      if ((y % 4 == 0 && y % 100 != 0) || (y % 400 == 0))
+        printf("12.09.%d", y);
+        else
+        printf("13.09.%d",y);
+    }
+}
