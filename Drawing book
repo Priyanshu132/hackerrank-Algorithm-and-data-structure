@@ -1,0 +1,11 @@
+#include <stdio.h>
+int main(){
+    int a,b,x,y;    // here a=no of pages, b= page want, x & y=turn. 
+    scanf("%d %d",&a,&b);
+    x=b/2;
+    y=(a/2)-x;
+    if(x<y)
+    printf("%d",x);
+    else
+    printf("%d",y);
+}
