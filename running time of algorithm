@@ -1,0 +1,34 @@
+#include <assert.h>
+#include <limits.h>
+#include <math.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int insertionsort(int*, int);
+int main()
+{
+    int size,i,l;
+    int *a;
+    scanf("%d",&size);
+    a=malloc(size*sizeof(int*));
+     for(i=0;i<size;i++){
+         scanf("%d",&a[i]);
+     }
+        l=insertionsort(a,size);
+        printf("%d",l);
+        return 0;
+}
+int insertionsort(int *a,int size){
+    int i,k,temp,count=0;
+    for(i=1;i<size;i++){
+    temp=a[i];
+    for(k=i;k>0&&a[k-1]>temp;k--){
+        a[k]=a[k-1];count++;
+    }
+    a[k]=temp;
+    }
+    return count;
+}
