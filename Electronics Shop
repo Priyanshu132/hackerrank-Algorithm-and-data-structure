@@ -1,0 +1,33 @@
+#include <assert.h>
+#include <limits.h>
+#include <math.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int main(){
+    long int *k,*d;
+    int n,m,i,j;
+      long int sum=0,max,b;
+    scanf("%lld%d%d",&b,&n,&m);
+    k=malloc(n * sizeof(long int));
+    d=malloc(m * sizeof(long int));
+    for(i=0;i<n;i++)
+    scanf("%ld",&k[i]);
+    for(i=0;i<m;i++)
+    scanf("%ld",&d[i]);
+    max=-1;
+    for(i=0;i<n;i++){
+        if(k[i]>=b)     // to reduce the time 
+        continue;
+        for(j=0;j<m;j++){
+            if(d[j]>=b)          // to reduce the time
+            continue;
+            sum=k[i]+d[j];
+            if(max<sum && sum<=b)
+            max=sum;
+        }
+    }
+    printf("%ld",max);
+}
+
