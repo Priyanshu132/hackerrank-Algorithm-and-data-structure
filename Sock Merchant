@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+    int a,j,sum=0,i,pair_of_socks=0,temp=0,*b;
+    scanf("%d",&a);                        // no of socks.
+    b=malloc(a * sizeof(int));
+   for(i=0;i<a;i++)
+   scanf("%d",&b[i]);   
+   for(i=1;i<a;i++){                    // sorting the arrary in ascending order
+      temp=b[i];
+       for(j=i;j>0&&b[j-1]>temp;j--){           
+           b[j]=b[j-1];
+       }
+       b[j]=temp;
+   }
+   i=0;
+   while(i<a-1){         
+          if(b[i]==b[i+1]){
+         pair_of_socks++;
+         i=i+2;                  //  i=i+2  prevents unconditional retition of pairs
+          }
+        else 
+        i++;
+   }
+   printf("%d",pair_of_socks);
+}
