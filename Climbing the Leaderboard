@@ -1,0 +1,51 @@
+#include <assert.h>
+#include <limits.h>
+#include <math.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+void climbingLeaderboard(long int,long int*,long int,long int*);
+
+void climbingLeaderboard(long int scores_count, long int* scores,long int alice_count, long int* alice) {
+    long int i=0,j,k,rank=0;
+     int rank_holder[alice_count];
+        for(j=alice_count-1;j>=0;j--){                // it reduce the no of iteration
+        while(i<scores_count){
+            k=i;                                         // it prevents  from  repeating  rank by same no. 
+            if(alice[j]>=scores[i])
+                break;
+                rank++;
+            i++;
+            while(scores[k]==scores[k+1]){                       // it prevents  from  repeating  rank by same no.
+                i++;k++; 
+            }
+
+            }
+            rank_holder[j]=rank+1;                      // here rank always increases.
+            
+        }
+        for(i=0;i<alice_count;i++)
+   printf("%d\n",rank_holder[i]);
+
+}
+
+
+int main()
+{
+   int i,j;
+   long int *score,*alice,*result;
+    long int score_count,alice_count;
+   scanf("%ld",&score_count);
+   score=malloc(score_count * sizeof(long int));
+   for(i=0;i<score_count;i++)
+   scanf("%ld",&score[i]);
+    scanf("%ld",&alice_count);
+    alice=malloc(alice_count * sizeof(long int));
+   for(i=0;i<alice_count;i++)
+   scanf("%ld",&alice[i]);
+   climbingLeaderboard(score_count,score,alice_count,alice);
+
+   }
