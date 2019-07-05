@@ -1,0 +1,32 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+   int i,temp,k,*n,test_cases;
+    long int digit_count=0;
+    scanf("%d",&test_cases);
+    n=malloc(test_cases*sizeof(long int));
+    for(i=0;i<test_cases;i++){
+        scanf("%d",&n[i]);
+    }
+    for(i=0;i<test_cases;i++){
+    temp=n[i];
+        digit_count=0;
+    while(temp!=0){
+        k=temp%10;
+        if(k==0){
+           temp/=10;
+              continue;
+}
+        if(n[i]%k==0)
+            digit_count++;
+            temp=temp/10;
+    }
+    printf("%ld\n",digit_count);
+    }
+}
+
+
