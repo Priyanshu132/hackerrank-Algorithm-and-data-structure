@@ -1,0 +1,57 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the encryption function below.
+    static String encryption(String s) {
+                
+                String st=s.replace(" ","");
+                s="";
+                int col;
+             int length=st.length();
+             int rows=(int)Math.sqrt(length);
+             if(rows*rows!=length)
+              col=rows+1;
+              else
+              col=rows;
+             if(rows*(rows+1)<length)
+                rows++;
+                       
+            for(int j=0;j<col;j++){
+                for(int i=j;i<length;i=i+col){
+                    String ch=Character.toString(st.charAt(i));
+                        s=s.concat(ch);
+                }
+                s=s.concat(" ");
+            }
+        
+        
+             return s;
+            
+    }
+
+
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String s = scanner.nextLine();
+
+        String result = encryption(s);
+
+        bufferedWriter.write(result);
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
