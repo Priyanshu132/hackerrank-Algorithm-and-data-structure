@@ -1,0 +1,46 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Main {
+    public static void main(String[] args) {
+        
+
+Scanner scanner = new Scanner(System.in);
+         int p=0,count=0;
+        int size=scanner.nextInt();
+         int[] B=new int[size];
+         for(int i=0;i<size;i++)
+         {
+             B[i]=scanner.nextInt();
+           //  sum=sum+B[i];
+         }
+            for(int i=0;i<size;i++){
+               if(B[i]%2!=0){
+                   if(i==size-1){
+                   p=1;
+                   break;
+                   }
+                  B[i]++;
+                  B[i+1]++;
+                  count=count+2;
+            }
+            }
+            if(p==1){
+                System.out.println("NO");
+               
+            }
+                else
+            System.out.println(count);
+               
+
+}
+    }
+
+    
+
+   
