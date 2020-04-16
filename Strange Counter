@@ -1,0 +1,52 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the strangeCounter function below.
+    static long strangeCounter(long t) {
+     long count=1;
+     
+     long temp_count=1;
+     if(t==1)
+     return 3;
+     while(count!=0){
+         if(count < t && t <=(count+(2*temp_count))){
+             long temp=(count+(2*temp_count))-t;
+             return (temp+1);
+         }
+         else{
+             count=(count+(2*temp_count));
+             if(temp_count==1)
+             temp_count=3*temp_count;
+             else
+             temp_count=2*temp_count;
+         }
+     }
+     return 0;
+
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        long t = scanner.nextLong();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        long result = strangeCounter(t);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
