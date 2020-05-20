@@ -1,0 +1,70 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the pylons function below.
+def pylons(k, line2):
+    
+    count=0
+    for i in line2: 
+        if i==0:
+            count+=1
+        else:
+            count=0
+        if count>2*(k-1):
+            return -1
+    start=0
+    last=0
+    for i in range(k):
+        if line2[i]==0:
+            start+=1
+        if line2[n-1-i]==0:
+            last+=1
+    if start==k or last==k:
+        return -1
+    counter=(2*k)-1
+    i=k-1
+    #for i in range(k-1,n,counter):
+    while i<=n:   
+        j=i
+        while line2[j]==0:
+            j-=1
+        line2[j]+=5
+        i=j
+        print(i)
+        if i+counter>=n and n-i>k:
+            j=n-1
+            while line2[j]==0:
+                j-=1
+            line2[j]+=5
+            i=j
+        i+=counter
+    po_plant=0
+    for i in line2:
+        if i==6:
+            po_plant+=1
+    return po_plant
+
+
+
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    nk = input().split()
+
+    n = int(nk[0])
+
+    k = int(nk[1])
+
+    arr = list(map(int, input().rstrip().split()))
+
+    result = pylons(k, arr)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
