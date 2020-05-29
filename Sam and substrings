@@ -1,0 +1,47 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the substrings function below.
+    static int substrings(String n) {
+       int size=n.length();
+         BigInteger f = new BigInteger("0");
+          BigInteger mod1 = new BigInteger("1000000007");
+            BigInteger ones = new BigInteger("1");
+            for(int i=size-1;i>=0;i--){
+                BigInteger temp = new BigInteger("1");
+                temp = temp.multiply(BigInteger.valueOf(i+1));
+                temp = temp.multiply(ones);
+                temp = temp.multiply(BigInteger.valueOf(Integer.parseInt(String.valueOf(n.charAt(i)))));
+
+                f=(f.add(temp)).mod(mod1);
+                ones= ((ones.multiply(BigInteger.valueOf(10))).add(BigInteger.valueOf(1))).mod(mod1);
+            }
+        return f.intValue();
+
+
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String n = scanner.nextLine();
+
+        int result = substrings(n);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
