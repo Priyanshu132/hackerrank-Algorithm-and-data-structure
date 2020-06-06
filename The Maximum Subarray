@@ -1,0 +1,87 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the maxSubarray function below.
+    static int[] maxSubarray(int[] arr) {
+        int[] result=new int[2];
+        int max_subarray=0;
+        int max_temp=0;
+        int max_subseq=0;
+        int max=arr[0];
+        for(int i=0;i<arr.length;i++){
+            
+            if(arr[i]>=0){
+                max_subseq+=arr[i];  
+            }
+
+            max_temp+=arr[i];
+            if(max_temp<0)
+            max_temp=0;
+            
+            if(max_subarray<max_temp){
+                    max_subarray=max_temp;
+                }
+            
+            if(max<arr[i])
+            max=arr[i];
+        }
+        if(max_subarray==0 && max_subseq==0)
+        {
+            result[0]=max;
+            result[1]=max;
+        }
+        else{
+        result[0]=max_subarray;
+        result[1]=max_subseq;
+        }
+        return result;
+
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int t = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        for (int tItr = 0; tItr < t; tItr++) {
+            int n = scanner.nextInt();
+            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+            int[] arr = new int[n];
+
+            String[] arrItems = scanner.nextLine().split(" ");
+            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+            for (int i = 0; i < n; i++) {
+                int arrItem = Integer.parseInt(arrItems[i]);
+                arr[i] = arrItem;
+            }
+
+            int[] result = maxSubarray(arr);
+
+            for (int i = 0; i < result.length; i++) {
+                bufferedWriter.write(String.valueOf(result[i]));
+
+                if (i != result.length - 1) {
+                    bufferedWriter.write(" ");
+                }
+            }
+
+            bufferedWriter.newLine();
+        }
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
