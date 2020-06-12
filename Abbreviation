@@ -1,0 +1,88 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the abbreviation function below.
+    static String abbreviation(String a, String b) {
+
+        int[][] dp=new int[a.length()+1][b.length()+1];
+
+    //     int pre=0;
+    //     int j;
+    //     for(int i=0;i<a.length();i++){
+    //          if((int)a.charAt(i)>= 65 && (int)a.charAt(i) <=90){
+    //         for( j=pre;j<b.length();j++){
+           
+    //          if(a.charAt(i)==b.charAt(j)){
+    //              pre=j+1;
+                
+    //              break;
+    //          }
+             
+    //         }
+    //         if(j==b.length()){
+    //             return "NO";
+    //         }
+    //         }
+    // }
+     
+
+        for(int i=0;i<a.length()+1;i++){
+            for(int j=0;j<b.length()+1;j++){
+                if(i==0)
+                dp[i][j]=0;
+                if(j==0)
+                dp[i][j]=1;
+            }
+        }
+
+          for(int i=1;i<a.length()+1;i++){
+            for(int j=1;j<b.length()+1;j++){
+                if(a.charAt(i-1)==b.charAt(j-1)){
+                    dp[i][j]=dp[i-1][j-1];
+                }
+                else if(Character.toLowerCase(a.charAt(i-1))==Character.toLowerCase(b.charAt(j-1))){
+                    dp[i][j]=Math.max(dp[i-1][j-1],dp[i-1][j]);
+                }
+                else if((int)a.charAt(i-1)>= 65 && (int)a.charAt(i-1) <=90){
+                    dp[i][j]=0;
+                }
+                else{
+                    dp[i][j]=dp[i-1][j];
+                }
+            }
+          }
+          //System.out.println(dp[a.length()][b.length()]);
+          return dp[a.length()][b.length()]==1 ? "YES" : "NO";
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int q = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        for (int qItr = 0; qItr < q; qItr++) {
+            String a = scanner.nextLine();
+
+            String b = scanner.nextLine();
+
+            String result = abbreviation(a, b);
+
+            bufferedWriter.write(result);
+            bufferedWriter.newLine();
+        }
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
