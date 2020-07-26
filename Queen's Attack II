@@ -1,0 +1,172 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution
+{
+
+private static StringTokenizer st;
+    
+    public static void nextLine(BufferedReader br) throws IOException
+    {
+        st = new StringTokenizer(br.readLine());
+    }
+    
+    public static int nextInt()
+    {
+        return Integer.parseInt(st.nextToken());
+    }
+    
+    public static String next()
+    {
+        return st.nextToken();
+    }
+    
+    public static long nextLong()
+    {
+        return Long.parseLong(st.nextToken());
+    }
+
+    public static double nextDouble()
+    {
+        return Double.parseDouble(st.nextToken());
+    }
+    
+    public static void main(String[] args) throws IOException
+    {
+BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        nextLine(br);
+        int n = nextInt();
+        int k = nextInt();
+         nextLine(br);
+        // long[][] chess=new long[n][n];
+        int x=nextInt();
+        int y=nextInt();
+      //  chess[x][y]=2;
+      HashMap<Integer,ArrayList> mp=new HashMap<>();
+        for (int i = 0; i <k;i++){
+            nextLine(br);
+            int a=nextInt();
+            int b=nextInt();
+           
+            if(mp.containsKey(a)){
+                ArrayList<Integer> ll=(ArrayList)mp.get(a);
+                ll.add(b);
+                mp.put(a, ll);
+                
+            } else{
+                ArrayList<Integer> list=new ArrayList<>();
+                list.add(b);
+                mp.put(a, list);
+            }
+               
+          
+        }
+        int ans=0,p,q;
+        
+        p=x+1;
+        q=y;
+        while(p<=n){
+            if(mp.containsKey(p)){
+                if(mp.get(p).contains(q)){
+                    break;
+                }
+            }
+            ans++;
+            p++;
+        }
+        
+         p=x;
+        q=y-1;
+        while(q>=1){
+            if(mp.containsKey(p)){
+                if(mp.get(p).contains(q)){
+                    break;
+                }
+            }
+            ans++;
+            q--;
+        }
+        
+        
+         p=x-1;
+        q=y;
+        while(p>=1){
+            if(mp.containsKey(p)){
+                if(mp.get(p).contains(q)){
+                    break;
+                }
+            }
+            ans++;
+            p--;
+        }
+        
+         p=x;
+        q=y+1;
+        while(q<=n){
+            if(mp.containsKey(p)){
+                if(mp.get(p).contains(q)){
+                    break;
+                }
+            }
+            ans++;
+            q++;
+        }
+        
+        p=x+1;
+        q=y+1;
+        while(p<=n&&q<=n){
+            if(mp.containsKey(p)){
+                if(mp.get(p).contains(q)){
+                    break;
+                }
+            }
+            ans++;
+            p++;
+            q++;
+        }
+        
+         p=x+1;
+        q=y-1;
+        while(p<=n&&q>=1){
+            if(mp.containsKey(p)){
+                if(mp.get(p).contains(q)){
+                    break;
+                }
+            }
+            ans++;
+            p++;
+            q--;
+        }
+        
+        
+         p=x-1;
+        q=y+1;
+        while(p>=1&&q<=n){
+            if(mp.containsKey(p)){
+                if(mp.get(p).contains(q)){
+                    break;
+                }
+            }
+            ans++;
+            p--;
+            q++;
+        }
+        
+         p=x-1;
+        q=y-1;
+        while(p>=1&&q>=1){
+            if(mp.containsKey(p)){
+                if(mp.get(p).contains(q)){
+                    break;
+                }
+            }
+            ans++;
+            p--;
+            q--;
+        }
+        
+        
+        System.out.print(ans);
+    }
+
+}
