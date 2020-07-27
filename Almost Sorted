@@ -1,0 +1,108 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+import java.util.Arrays; 
+
+public class Solution {
+
+    
+    static void almostSorted(int[] arr) {
+
+       int[] sorted_arr = Arrays.copyOf(arr,arr.length);
+       Arrays.sort(sorted_arr);
+
+       int start = -1;
+       int end = -1;
+
+       for(int i=0;i<arr.length-1;i++){
+           if(arr[i] > arr[i+1]){
+               start = i;
+               break;
+           }
+       }
+
+       for(int i=arr.length-1;i>=1;i--){
+           if(arr[i] < arr[i-1]){
+               end = i ;
+               break;
+           }
+          
+       }
+      
+   
+           arr = swap(arr,start,end);
+          
+           if(Arrays.equals(arr, sorted_arr)){
+               System.out.println("yes");
+               System.out.println("swap "+(start+1)+" "+(end+1));
+               return;
+       }
+      
+         
+               int[] rev = new int[end - start + 1];
+              
+                   arr = swap(arr,start,end);
+               int k = end;
+             
+                for(int j =0 ;j < rev.length ;j++){
+              
+               rev[j] =  arr[k];
+               
+               k--;
+                
+                }
+                
+        
+                for(int i = start ;i <= end ;i++){
+                    arr[i] = rev[i-start];
+                }
+               
+           
+           if(Arrays.equals(arr, sorted_arr)){
+               System.out.println("yes");
+               System.out.println("reverse "+(start+1)+" "+(end+1));
+       }
+       else{
+            System.out.println("no");
+       }
+       
+       
+
+       
+    }
+
+    static int[] swap(int[] arr,int start, int end){
+        int temp;
+         temp = arr[start];
+           arr[start] = arr[end];
+           arr[end] = temp;
+
+           return arr;
+    }
+
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        int n = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        int[] arr = new int[n];
+
+        String[] arrItems = scanner.nextLine().split(" ");
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        for (int i = 0; i < n; i++) {
+            int arrItem = Integer.parseInt(arrItems[i]);
+            arr[i] = arrItem;
+        }
+
+        almostSorted(arr);
+
+        scanner.close();
+    }
+}
