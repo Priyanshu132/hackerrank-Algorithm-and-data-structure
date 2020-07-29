@@ -1,0 +1,89 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the twoPluses function below.
+    static int twoPluses(String[] grid) {
+        
+        int R = grid.length;
+        int C = grid[0].length();
+        int[][] arr = new int[R+2][C+2];
+        for(int i = 1;i < R+1 ;i++){
+            for( int k = 1 ;k < C+1 ;k++){
+                if(grid[i-1].charAt(k-1)=='G')
+                arr[i][k] = 1;
+            
+            else{
+                arr[i][k] = -1;
+            }
+        }
+        }
+        int ans = 0;
+          for(int i = 1;i < R+1 ;i++){
+            for( int k = 1 ;k < C+1 ;k++){
+                int count = 0;
+                
+             while(arr[i+count][k]== 1 && arr[i-count][k]== 1 && arr[i][k+count]== 1 &&
+             arr[i][k-count]== 1){
+                 arr[i+count][k] = arr[i-count][k] = arr[i][k+count] = arr[i][k-count]                  = 2;
+
+                  for(int j = 1;j < R+1 ;j++){
+            for( int p = 1 ;p < C+1 ;p++){
+                 int count_j = 0;
+                 while(arr[j+count_j][p]== 1 && arr[j-count_j][p]== 1 && arr[j][p+count_j]== 1 && arr[j][p-count_j]== 1){
+                     ans = Math.max(ans,(((count * 4) + 1)*((count_j * 4 )+1)));
+                     count_j++;
+            }
+                  }
+                 
+             }
+             count++;
+     
+            }
+            count = 0;
+             while(arr[i+count][k]== 2 && arr[i-count][k]== 2 && arr[i][k+count]== 2 &&
+             arr[i][k-count]== 2){
+                 arr[i+count][k] = arr[i-count][k] = arr[i][k+count] = arr[i][k-count]                  = 1;
+                 count++;
+             
+        }
+            }
+          }
+        return ans;
+
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String[] nm = scanner.nextLine().split(" ");
+
+        int n = Integer.parseInt(nm[0]);
+
+        int m = Integer.parseInt(nm[1]);
+
+        String[] grid = new String[n];
+
+        for (int i = 0; i < n; i++) {
+            String gridItem = scanner.nextLine();
+            grid[i] = gridItem;
+        }
+
+        int result = twoPluses(grid);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
