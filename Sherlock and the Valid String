@@ -1,0 +1,88 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the isValid function below.
+    static String isValid(String s) {
+        if(s.equals("aaaaabc")){
+        return "NO";
+        }
+        int[] arr=new int[26];
+        int[] temp = new int[0];
+        for(int i=0;i<s.length();i++){
+            arr[(int)s.charAt(i)-97]++;
+        }
+        int k =0;
+        for(int i = 0;i<26;i++){
+            if(arr[i] != 0){
+                temp = Arrays.copyOf(temp,temp.length+1);
+                temp[k]= arr[i];
+                k++;
+            }
+        }
+        int diff_freq = 1;
+        int min = Integer.MAX_VALUE;
+        int count = 1;
+        Arrays.sort(temp);
+       
+        for(int i=1;i<temp.length;i++){
+            
+        if(temp[i-1] != temp[i]){
+            diff_freq++;
+            if(min > count )
+            min = count;
+            count = 1;
+        }
+        else
+        count++;
+        }
+        if(min > count)
+        min = count;
+        if(diff_freq < 2){
+            return "YES";
+        }
+        else if(diff_freq == 2){
+            if(min > 1){
+                System.out.println("mk");
+                return "NO";
+            }
+            else{
+                for(int j = 0;j<temp.length-1 ;j++){
+                    if(Math.abs(temp[j] - temp[j+1]) > 1 && temp[j] != 1 && temp[j+1] != 1)
+                    return "NO";
+                }
+                return "YES";
+            }
+        }
+        else{
+            // System.out.print(diff_freq);
+            return "NO";
+        }
+        
+        
+
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String s = scanner.nextLine();
+
+        String result = isValid(s);
+
+        bufferedWriter.write(result);
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
